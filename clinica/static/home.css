@@ -1,0 +1,23 @@
+.contenedor{
+    height: 100%;
+    display: flex;
+    padding: 10px;
+    
+}
+html, body{
+    height: 100%;
+    margin: 0;
+}
+.half {
+    flex: 1;
+    padding: 20px;
+    border: 3px dotted #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.half button {
+    margin-top: 20px;
+}

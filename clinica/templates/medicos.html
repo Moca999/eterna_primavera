@@ -1,0 +1,70 @@
+{% extends 'plantilla.html' %}
+<!---Este pertenece a la tabla de medicos en personal administrativo-->
+{% block content %}
+
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-warning">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+
+    <h2 class="text-center">Registrar Nuevo Médico</h2>
+
+    <form class="w-50 shadow mx-auto p-4 m-3" method="post" action="medicos/guardar">
+
+        {% csrf_token %}
+
+        Nombre: <input type="text" name="nombre" class="form-control my-2" required >
+        No. Colegiado: <input type="number" name="colegiado" class="form-control my-2"  required max="999999999">
+        Especialidad: <input type="text" name="especialidad" class="form-control my-2" required >
+        
+        <input type="submit" value="Guardar" class="btn btn-outline-primary">
+
+    </form>
+
+    <table class="table table-info w-75 mx-auto text-center align-middle table-striped">
+
+        <tr>
+            <th>Nombre</th>
+            <th>No. Colegiado</th>
+            <th>Especialidad</th>
+            <th colspan="2"></th>
+
+        </tr>
+
+        {% for medico in lista_medicos %}
+
+        <tr>
+
+            <td>{{ medico.nombre }}</td>
+            <td>{{ medico.colegiado }}</td>
+            <td>{{ medico.especialidad }}</td>
+            <td>
+                <form action="{% url 'medicoseliminar' medico.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-danger" onclick="return confirm('¿Quieres eliminar a este medico?')">
+                        <i class="fa-solid fa-user-xmark"></i>
+                    </button>
+
+
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'medicosmostrar' medico.id %}" method="post">
+
+                    {% csrf_token %}
+ 
+                    <button class="btn btn-outline-success">
+                        <i class="fa-solid fa-user-pen"></i>
+                    </button>
+
+                </form>
+            </td>
+        </tr>
+
+    {% endfor %}
+
+
+    </table>
+
+{% endblock %}

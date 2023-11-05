@@ -1,0 +1,21 @@
+{% extends 'plantilla.html' %}
+{% block content %}
+<!---Este pertenece a la tabla de medicos en personal administrativo-->
+
+    <h2 class="text-center m-3">Edita los datos</h2>
+
+    <form class="w-50 shadow mx-auto p-4 m-3" method="post" action="{% url 'medicosmodificar' %}">
+
+        {% csrf_token %}
+
+        <input type="hidden" name="id" value="{{ medico.id }}">
+
+        Nombre: <input type="text" name="nombre" class="form-control my-2" required value="{{ medico.nombre }}">
+        No. Colegiado: <input type="number" name="colegiado" class="form-control my-2"  required value="{{ medico.colegiado }}" max="999999999">
+        Especialidad: <input type="text" name="especialidad" class="form-control my-2" required value="{{ medico.especialidad }}">
+        
+        <input type="submit" value="Finalizar" class="btn btn-primary">
+
+    </form>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'plantilla.html' %}
+{% block content %}
+
+<form class="w-50 shadow mx-auto p-4 m-3" method="post" action="{% url 'staffcitasmodificar' %}">
+    {% csrf_token %}
+
+    <input type="hidden" name="id" value="{{ citas.id }}">
+
+
+    Nombre: <input type="text" name="nombre" class="form-control my-2" required value="{{ citas.nombre }}">
+    DPI: <input type="number" name="dpi" class="form-control my-2"  required value="{{ citas.dpi }}">
+    Fecha visita: <input type="date" name="fecha_cita" class="form-control my-2" value="{{ citas.fecha_cita }}">
+    Razón de la visita: <textarea class="form-control my-2" name="razon_cita" >{{ citas.razon_cita }}</textarea>
+    Receta: <textarea class="form-control my-2" name="receta" placeholder="Opcional">{{ citas.receta }}</textarea>
+    Diagnostico: <textarea class="form-control my-2" name="diagnostico" placeholder="Opcional">{{ citas.diagnostico }}</textarea>
+    Doctor: <input type="text" name="doctor" class="form-control my-2" placeholder="Opcional" value="{{ citas.doctor }}">
+    <input type="submit" value="Guardar" class="btn btn-outline-primary">
+</form>
+
+{% endblock %}

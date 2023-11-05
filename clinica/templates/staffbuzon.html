@@ -1,0 +1,32 @@
+{% extends 'plantilla.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'staffbuzon.css' %}">
+<h1 class="text-center">Buzón</h1>
+
+<table class="table table-info w-75 mx-auto text-center align-middle table-striped">
+
+    <tr class="table-dark">
+        <th>Nombre</th>
+        <th>Teléfono</th>
+        <th>Asunto</th>
+        <th>Contenido</th>
+        <th>Fecha</th>
+        <th></th>
+    </tr>
+
+    {% for mensaje in mensajes %}
+        <tr>
+            <td>{{mensaje.nombre}}</td>
+            <td>{{mensaje.telefono}}</td>
+            <td>{{mensaje.asunto}}</td>
+            <td>{{mensaje.contenido}}</td>
+            <td>{{mensaje.fecha}}</td>
+            <td></td>
+        </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

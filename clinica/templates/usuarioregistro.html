@@ -1,0 +1,21 @@
+{% extends 'usuarioplantilla.html' %}<!---Este pertenece a la zona del usuario class="w-50 shadow mx-auto p-4 m-3"-->
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+<h1 class="text-center">Registrate en la Clínica</h1>
+<h2 class="text-center">Puedes agendar una visita o solamente registrarte</h2>
+<form class="w-50 shadow mx-auto p-4 m-3" method="post" action="{% url 'usuarioregistrar' %}">
+    {% csrf_token %}
+    Nombre: <input type="text" name="nombre" class="form-control my-2" required >
+    DPI: <input type="number" name="dpi" class="form-control my-2"  required max="9999999999999">
+    Teléfono: <input type="number" name="telefono" class="form-control my-2"  required max="99999999">
+    Nacimiento: <input type="date" name="nacimiento" class="form-control my-2"  required>
+    Dirección: <input type="text" name="direccion" class="form-control my-2" required>
+    Fecha visita: <input type="date" name="fecha_cita" class="form-control my-2" placeholder="Opcional">
+    Razón de la visita: <textarea class="form-control my-2" name="razon_cita" placeholder="Opcional"></textarea>
+    <input type="submit" value="Guardar" class="btn btn-outline-primary">
+</form>
+{% endblock %}

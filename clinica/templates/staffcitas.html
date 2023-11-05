@@ -1,0 +1,71 @@
+{% extends 'plantilla.html' %}
+{% block content %}
+{% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-warning">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+<h1 class="text-center">Citas</h1>
+
+<h2 class="text-center">Crear Cita</h2>
+
+<form class="w-50 shadow mx-auto p-4 m-3" method="post" action="{% url 'staffcitasguardar' %}">
+    {% csrf_token %}
+    Nombre: <input type="text" name="nombre" class="form-control my-2" required >
+    DPI: <input type="number" name="dpi" class="form-control my-2"  required>
+    Fecha cita: <input type="date" name="fecha_cita" class="form-control my-2" >
+    Razón de la cita: <textarea class="form-control my-2" name="razon_cita" ></textarea>
+    Receta: <textarea class="form-control my-2" name="receta" placeholder="Opcional"></textarea>
+    Diagnostico: <textarea class="form-control my-2" name="diagnostico" placeholder="Opcional"></textarea>
+    Doctor: <input type="text" name="doctor" class="form-control my-2" placeholder="Opcional" >
+    <input type="submit" value="Guardar" class="btn btn-outline-primary">
+</form>
+
+<h2 class="text-center">Historial</h2>
+<table class="table table-info w-75 mx-auto text-center align-middle table-striped">
+    <tr class="table-dark">
+    <th>Nombre</th>
+    <th>DPI</th>
+    <th>Fecha cita</th>
+    <th>Razón</th>
+    <th>Diagnostico</th>
+    <th>Doctor</th>
+    <th colspan="2"></th>
+    </tr>
+    {% for cita in citas %}
+
+        <tr>
+            <td>{{ cita.nombre }}</td>
+            <td>{{ cita.dpi }}</td>
+            <td>{{ cita.fecha_cita }}</td>
+            <td>{{ cita.razon_cita }}</td>
+            <td>{{ cita.diagnostico  }}</td>
+            <td>{{ cita.doctor }}</td>
+            <td>
+                <form action="{% url 'staffcitaseliminar' cita.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-danger" onclick="return confirm('¿Quieres eliminar este registro?')">
+                        <i class="fa-solid fa-user-xmark"></i>
+                    </button>
+
+
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'staffcitasmostrar' cita.id %}" method="post">
+
+                    {% csrf_token %}
+
+                    <button class="btn btn-outline-success">
+                        <i class="fa-solid fa-user-pen"></i>
+                    </button>
+
+                </form>
+            </td>
+
+        </tr>
+
+    {% endfor %}
+</table>
+
+{% endblock %}

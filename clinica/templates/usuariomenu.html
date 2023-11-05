@@ -1,0 +1,20 @@
+{% extends 'usuarioplantilla.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'usuariomenu.css' %}">
+
+<h1 class="text-center">Seleccione como desea ingresar</h1>
+<div class="button-container">
+    
+    <div class="seccion">
+        <a class="nav-link active" aria-current="page" href="{% url 'usuarioregistro' %}">Registrarme</a>
+    </div>
+    <div class="seccion">
+        <a class="nav-link active" aria-current="page" href="{% url 'usuariomensaje' %}">Enviar un Mensaje</a>
+    </div>
+    <div class="seccion">
+        <a class="nav-link active" aria-current="page" href="{% url 'usuariocita' %}">Crear Cita</a>
+    </div>
+</div>
+      
+{% endblock %}

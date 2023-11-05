@@ -1,0 +1,31 @@
+{% extends 'usuarioplantilla.html' %}
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+
+<h1 class="text-center">Contactate con la Clínica</h1>
+
+<form class="w-50 shadow mx-auto p-4 m-3" method="post" action="{% url 'usuarioenviarmensaje' %}">
+    {% csrf_token %}
+    Nombre: <input type="text" name="nombre" class="form-control my-2" required >
+    Telefono: <input   type="number" name="telefono" class="form-control my-2" required >
+    Asunto: <input type="text" name="asunto" class="form-control my-2" >
+    Contenido: <textarea  maxlength="300" class="form-control my-2" name="contenido" required></textarea>
+    
+    <input type="submit" value="Enviar" class="btn btn-outline-primary">
+
+</form>
+<p id="fechaActual" class="text-center"></p>
+    <script>
+        const dateElement = document.getElementById('fechaActual');
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const today = new Date().toLocaleDateString('es-LA', options);
+        dateElement.innerHTML = "Fecha actual: " + today;
+    </script>
+
+
+{% endblock %}

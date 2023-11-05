@@ -1,0 +1,17 @@
+{% extends 'usuarioplantilla.html' %}
+{% block content %}
+{% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+<h1 class="text-center">Crear cita para usuarios</h1>
+<form class="w-50 shadow mx-auto p-4 m-3" method="post" action="{% url 'usuariocitaguardar' %}">
+    {% csrf_token %}
+    Nombre: <input type="text" name="nombre" class="form-control my-2" required >
+    DPI: <input type="number" name="dpi" class="form-control my-2"  required max="9999999999999">
+    Fecha cita: <input type="date" name="fecha_cita" class="form-control my-2" required>
+    Razón de la cita: <textarea class="form-control my-2" name="razon_cita" required></textarea>
+    <input type="submit" value="Guardar" class="btn btn-outline-primary">
+</form>
+{% endblock %}

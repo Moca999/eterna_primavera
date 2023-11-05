@@ -1,0 +1,89 @@
+{% extends 'plantilla.html' %}
+{% block content %}
+<!---Este pertenece a la tabla de pacientes en personal administrativo-->
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-warning">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <h2 class="text-center">Registrar Nuevo Paciente</h2>
+
+    <form class="w-50 shadow mx-auto p-4 m-3" method="post" action="{% url 'pacientesguardar' %}">
+
+        {% csrf_token %}
+
+        Nombre: <input type="text" name="nombre" class="form-control my-2" required >
+        DPI: <input type="number" name="dpi" class="form-control my-2"  required max="9999999999999">
+        Teléfono: <input type="number" name="telefono" class="form-control my-2" required max="99999999">
+        Nacimiento: <input type="date" name="nacimiento" class="form-control my-2"  required>
+        Dirección: <input type="text" name="direccion" class="form-control my-2" required>
+        Fecha visita: <input type="date" name="fecha_cita" class="form-control my-2" placeholder="Opcional">
+        Razón de la visita: <textarea class="form-control my-2" name="razon_cita" placeholder="Opcional"></textarea>
+        Receta: <textarea class="form-control my-2" name="receta" placeholder="Opcional"></textarea>
+        Diagnostico: <textarea class="form-control my-2" name="diagnostico" placeholder="Opcional"></textarea>
+        
+        <input type="submit" value="Guardar" class="btn btn-outline-primary">
+
+    </form>
+
+    <h2 class="text-center ">Registro de Pacientes</h2>
+
+    <table class="table table-info w-75 mx-auto text-center align-middle table-striped">
+        <tr class="table-dark">
+            <th>Nombre</th>
+            <th>DPI</th>
+            <th>Teléfono</th>
+            <th>Nacimiento</th>
+            <th>Dirección</th>
+            <th>Fecha cita</th>
+            <th>Razón de la cita</th>
+            <th>Receta</th>
+            <th>Diagnostico</th>
+            <th colspan="2"></th>
+        </tr>
+    {% for paciente in lista_pacientes %}
+
+        <tr>
+
+            <td>{{ paciente.nombre }}</td>
+            <td>{{ paciente.dpi }}</td>
+            <td>{{ paciente.telefono }}</td>
+            <td>{{ paciente.nacimiento }}</td>
+            <td>{{ paciente.direccion }}</td>
+            <td>{{ paciente.fecha_cita }}</td>
+            <td>{{ paciente.razon_cita }}</td>
+            <td>{{ paciente.receta }}</td>
+            <td>{{ paciente.diagnostico }}</td>
+            <td>
+                <form action="{% url 'pacienteseliminar' paciente.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-danger" onclick="return confirm('¿Quieres eliminar a este paciente?')">
+                        <i class="fa-solid fa-user-xmark"></i>
+                    </button>
+
+
+                </form>
+            </td>
+            <td>
+                <form action="{% url 'pacientesmostrar' paciente.id %}" method="post">
+
+                    {% csrf_token %}
+ 
+                    <button class="btn btn-outline-success">
+                        <i class="fa-solid fa-user-pen"></i>
+                    </button>
+
+                </form>
+            </td>
+        </tr>
+
+    {% endfor %}
+
+
+    </table>
+
+    
+
+{% endblock %}

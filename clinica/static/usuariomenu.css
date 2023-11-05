@@ -1,0 +1,25 @@
+.button-container {
+    width: 100%;
+    text-align: center; /* Alinea los botones al centro */
+    height: 75%;
+}
+html, body{
+    height: 100%;
+    margin: 0;
+}
+.seccion{
+    flex: 1;
+    padding: 20px;
+    margin: 10px;
+    border: 2px solid #ddd;
+    background: rgb(225, 201, 201);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/* Si prefieres usar flexbox */
+.button-container {
+    display: flex;
+    justify-content: center; /* Alinea los botones al centro */
+}

@@ -1,0 +1,12 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+table, th, td {
+  border: 1px solid black;
+}
+td {
+  /*width: 100%;  Tamaño fijo de la celda */
+  /*word-wrap: break-word;  Ajuste de palabra para que el texto se adapte al tamaño */
+  word-break: break-all
+}

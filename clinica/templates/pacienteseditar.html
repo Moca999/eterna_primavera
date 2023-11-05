@@ -1,0 +1,27 @@
+{% extends 'plantilla.html' %}
+{% block content %}
+<!---Este pertenece a la tabla de pacientes en personal administrativo-->
+
+    <h2 class="text-center">Estas en la zona pacientes</h2>
+
+    <form class="w-50 shadow mx-auto p-4 m-3" method="post" action="{% url 'pacientesmodificar' %}">
+
+        {% csrf_token %}
+
+        <input type="hidden" name="id" value="{{ paciente.id }}">
+
+        Nombre: <input type="text" name="nombre" class="form-control my-2" required value="{{ paciente.nombre }}">
+        DPI: <input type="number" name="dpi" class="form-control my-2"  required value="{{ paciente.dpi }}" max="9999999999999">
+        Teléfono: <input type="number" name="telefono" class="form-control my-2"  required value="{{ paciente.telefono }}" max="99999999">
+        Nacimiento: <input type="date" name="nacimiento" class="form-control my-2"  required value="{{ paciente.nacimiento }}">
+        Dirección: <input type="text" name="direccion" class="form-control my-2" required value="{{ paciente.direccion }}">
+        Fecha visita: <input type="date" name="fecha_cita" class="form-control my-2" value="{{ paciente.fecha_cita }}">
+        Razón de la visita: <textarea class="form-control my-2" name="razon_cita" >{{ paciente.razon_cita }}</textarea>
+        Receta: <textarea class="form-control my-2" name="receta" >{{ paciente.receta }}</textarea>
+        Diagnostico: <textarea class="form-control my-2" name="diagnostico" >{{ paciente.diagnostico }}</textarea>
+        
+        <input type="submit" value="Finalizar" class="btn btn-primary">
+
+    </form>
+
+{% endblock %}
